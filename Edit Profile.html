@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <title>Profile Page</title>
+</head>
+
+<body style="background-color:#fff3e0">
+     <nav class="nav-wrapper indigo darken-4">
+          <div class="container">
+
+               <img src="aclc_logo.png" class="brand-logo center"
+                    style="height: 10vh;padding-top: 6px;padding-bottom: 6px;">
+               <a style="font-weight: bold;font-size: 30px;margin-left: 100px;">Profile</a>
+
+               <ul class="right">
+                    <li><a href="" style="font-weight: bold;">Logout<i class="material-icons right"
+                                   style="font-size: 35px;margin-top: 5px;">logout</i></a></li>
+               </ul>
+          </div>
+     </nav>
+     <div style="display: flex;">
+          <img class="responsive-img" src="loginphoto1.jpg" style="width: 100%; height: 30vh;">
+
+          <div class="card-panel"
+               style="position: absolute;height: 78vh;width: 35%;margin-top: 55px; margin-left: 51%;border-radius: 20px;">
+               <p
+                    style="font-weight: bold;font-size: 30px;margin-top: 10px;margin-left: 23px;margin-bottom: 4px;color: #1a237e;">
+                    Edit User Info</p>
+               <hr>
+               <form action="#">
+                    <p style="font-weight: bold; margin-left: 25px;">Full Name
+                         <input type=" " placeholder="Enter full name" id="full_name" type="text" class="validate"
+                              style="margin-left: 56px; border-radius: 6px; width: 63%;padding: 7px; ">
+                    </p>
+                    <p style="font-weight: bold; margin-left: 25px; margin-top: 25px;">Email
+                         <input type=" " placeholder="Enter email address" id="email" type="text" class="validate"
+                              style="margin-left: 88px; border-radius: 6px; width: 63%;padding: 7px; ">
+                    </p>
+                    <p style="font-weight: bold; margin-left: 25px; margin-top: 25px;">LRN
+                         <input type=" " disabled value="123456789101" id="disabled" type="text" class="validate"
+                              style="margin-left: 96px; border-radius: 6px; width: 63%;padding: 7px; ">
+                    </p>
+                    <p style="font-weight: bold; margin-left: 25px; margin-top: 25px;">USN
+                         <input type=" " disabled value="123456789101" id="disabled" type="text" class="validate"
+                              style="margin-left: 96px; border-radius: 6px; width: 63%;padding: 7px; ">
+                    </p>
+                    <p style="font-weight: bold; margin-left: 25px; margin-top: 25px;">Role
+                         <input type=" " disabled value="Member" id="disabled" type="text" class="validate"
+                              style="margin-left: 96px; border-radius: 7px; width: 63%;padding: 7px;">
+                    </p>
+                    <button class="waves-effect waves-light" style="background-color: #1a237e ; border-radius: 15px;
+                border: 0; padding: 10px; margin-top: 50px; margin-left: 30%;">
+                         <a href="#" style="color: white; padding: 15px;">Save Changes</a></button>
+                    <button class=" waves-effect" style="background-color: white; border-radius: 15px;
+                padding: 10px; margin-top: 50px; margin-left:25px;">
+                         <a href="profile-page-member.html" style="color: black; padding: 10px;">Cancel</a></button>
+               </form>
+          </div>
+          <div class="card-panel"
+               style="position: absolute;height: 78vh;width: 25%;margin-top: 55px; margin-left: 23%;border-radius: 20px;">
+               <img src="Profile.png" style="position: absolute; height: 30vh; margin-top: 10%; margin-left: 15%;">
+
+               <p style="margin-top: 85%; text-align: center;"> JPG or PNG not larger than 2 MB</p>
+               <hr>
+               <form action="#">
+                    <div class="file-field input-field">
+                         <button class="waves-effect waves-light indigo darken-4"
+                              style="padding: 10px;border: 0;border-radius: 15px;margin-top: 10px;margin-left: 70px;">
+                              <a href="#" style="color: white;">Upload New Image</a>
+                              <input type="file" multiple>
+                         </button>
+
+                    </div>
+               </form>
+          </div>
+     </div>
+    
+
+     
+
+
+     <Script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
