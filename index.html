@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: pink;
+        }
+
+        header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            justify-content: center;
+            max-width: 1000px;
+            box-sizing: border-box;
+        }
+
+        .gallery div {
+            position: relative;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 25vh;
+            object-fit: cover;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upload-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .upload-section input[type="file"] {
+            display: none;
+        }
+
+        .upload-section label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .upload-section button {
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Fullscreen Modal for Zoom */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .gallery img {
+                height: 25vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 36px;
+            }
+
+            .gallery img {
+                height: 30vh;
+            }
+
+            .upload-section label, .upload-section button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Gallery</h1>
+    </header>
+
+    <div class="gallery" id="gallery">
+        <!-- Images will be added here -->
+    </div>
+
+    <div class="upload-section">
+        <label for="upload">Add Photo</label>
+        <input type="file" id="upload" accept="image/*">
+        <button id="saveGallery">Save Photos</button>
+    </div>
+
+    <!-- Zoom Modal -->
+    <div id="zoomModal" class="modal">
+        <span class="close" id="closeModal">&times;</span>
+        <img class="modal-content" id="zoomedImage">
+    </div>
+    <script>
+        const gallery = document.getElementById('gallery');
+        const uploadInput = document.getElementById('upload');
+        const saveButton = document.getElementById('saveGallery');
+        const zoomModal = document.getElementById('zoomModal');
+        const zoomedImage = document.getElementById('zoomedImage');
+        const closeModal = document.getElementById('closeModal');
+
+        // Load saved images from local storage
+        window.onload = () => {
+            const savedImages = JSON.parse(localStorage.getItem('photoGallery'));
+            if (savedImages) {
+                savedImages.forEach(src => addImageToGallery(src));
+            }
+        };
+
+        uploadInput.addEventListener('change', (event) => {
+            const files = event.target.files;
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = (e) => {
+                    addImageToGallery(e.target.result);
+                }
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+        saveButton.addEventListener('click', () => {
+            const images = gallery.querySelectorAll('img');
+            const imageSources = [];
+            images.forEach(img => imageSources.push(img.src));
+            localStorage.setItem('photoGallery', JSON.stringify(imageSources));
+            alert('Photos saved!');
+        });
+
+        function addImageToGallery(src) {
+            const imgContainer = document.createElement('div');
+            const img = document.createElement('img');
+            img.src = src;
+            imgContainer.appendChild(img);
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.innerHTML = '&times;';
+            deleteBtn.addEventListener('click', () => {
+                imgContainer.remove();
+                updateLocalStorage();
+            });
+
+            img.addEventListener('click', () => {
+                zoomedImage.src = src;
+                zoomModal.style.display = "flex";
+            });
+
+            imgContainer.appendChild(deleteBtn);
+            gallery.appendChild(imgContainer);
+        }
+
+        function updateLocalStorage() {
+            const images = gallery.querySelectorAll('img');
+            const imageSources = [];
+            images.forEach(img => imageSources.push(img.src));
+            localStorage.setItem('photoGallery', JSON.stringify(imageSources));
+        }
+
+        // Close the modal when clicking the close button
+        closeModal.addEventListener('click', () => {
+            zoomModal.style.display = "none";
+        });
+
+        // Close the modal when clicking outside the image
+        zoomModal.addEventListener('click', (e) => {
+            if (e.target == zoomModal) {
+                zoomModal.style.display = "none";
+            }
+        });
+    </script>
+    
+</body>
+</html>
