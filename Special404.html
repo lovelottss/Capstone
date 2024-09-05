@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Special 404</title>
+
+</head>
+<style>
+      .Main-Content-wave {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    
+    background:#1a237e;
+    font-family: Roboto;
+    overflow: hidden;
+}
+.Main-Content-wave:before, .Main-Content-wave:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    min-width: 300vw;
+    min-height:300vw;
+    background-color: #FFF9D0;
+    animation-name: rotate;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.Main-Content-wave:before {
+    bottom: 15vh;
+    border-radius: 45%;
+    animation-duration: 10s;
+}
+.Main-Content-wave:after {
+    bottom: 12vh;
+    opacity: .5;
+    border-radius: 47%;
+    animation-duration: 10s;
+}
+@keyframes rotate {
+    0% {transform: translate(-50%, 0) rotateZ(0deg);}
+    50% {transform: translate(-50%, -2%) rotateZ(180deg);}
+    100% {transform: translate(-50%, 0%) rotateZ(360deg);}
+}
+.Main-Content-wave * {
+    z-index: 1;
+}
+</style>
+
+<body style="background-color: #fff3e0;">
+
+<div class="Main-Content-wave">
+
+
+
+    <div class="container">
+    <div class="card-panel no-padding z-depth-4">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <h1
+                style="font-family: sans-serif; color: #1a237e;font-size: 40vh;font-weight: bolder;margin-bottom: 170px;">
+                404</h1>
+            <img src="Booktorn_page.png" class="z-depth-4"
+                style="height: 36vh; margin-left: 15px; margin-bottom: 178px;">
+
+            <div style="position:absolute; color: #1a237e;">
+                <h2
+                    style="font-family: sans-serif; font-weight: 600; font-size: 30px; margin-top: 200px;margin-right: 275px;">
+                    OOPS! Page NOT FOUND !</h2>
+                <h5 style="font-family: sans-serif; font-weight: lighter;">Sorry, the page that you were looking for
+                    doesn't
+                    exist.</h5>
+            </div>
+
+            <div style="float: left; position: absolute; margin-top: 400px; margin-right: 576px;">
+                <a class="waves-effect waves-light btn indigo darken-4" href="Header.html"
+                    style="border-radius: 10px;">return to home</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</body>
+
+</html>
